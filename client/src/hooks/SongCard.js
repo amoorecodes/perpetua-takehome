@@ -1,4 +1,4 @@
-import React, { useState, useeffect } from "react";
+import React, { useState, useEffect } from "react";
 
 function SongCard({ index, title, artist, trackId }) {
   const [lyrics, setLyrics] = useState("Lyrics loading...");

@@ -1,18 +1,41 @@
-import React, { userEffect, useState } from "react";
+import React, { useContext, userEffect, useState } from "react";
+import PlaylistContext from "../state/PlaylistContext";
 
 function PlaylistSearch(props) {
   const [category, setCategory] = useState("");
+  const [playlist, setPlaylist] = useContext(PlaylistContext);
 
-  function generatePlaylist(keywords) {
+  async function generatePlaylist(keywords) {
     console.log("Generating playlist: ", keywords);
+    try {
+      // set new playlist on the context
+      const query = new URLSearchParams({
+        format: "json",
+        q_lyrics: keywords,
+        quorum_factor: "1",
+        apikey: "",
+        page_size: "2",
+      });
+      // const response = await fetch("/api/generatePlaylist/" + query);
+      const response = await fetch("/track.search?" + query);
+      return response.json();
+    } catch (error) {
+      console.error("error> ", error);
+    }
   }
 
   return (
     <div className="playlist-search">
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          generatePlaylist(category);
+          generatePlaylist(category)
+            .then(({ message }) => {
+              setPlaylist([...playlist, ...message.body.track_list]);
+            })
+            .catch((err) =>
+              console.error("ERROR: getting songs from API\n", err)
+            );
         }}
       >
         <label htmlFor="search">
