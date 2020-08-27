@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import PlaylistContext from "../state/PlaylistContext";
 import PlayerContext from "../state/PlayerContext";
 
 function SongCard({ track_id, title, artist, index }) {
   const [lyrics, setLyrics] = useState("Lyrics loading...");
-  const [playlist, setPlaylist] = useContext(PlaylistContext);
   const [played, setPlayed] = useContext(PlayerContext);
 
   // make a request to the API to get lyrics
@@ -31,8 +29,9 @@ function SongCard({ track_id, title, artist, index }) {
   }, []);
 
   useEffect(() => {
-    console.log("lyrics, ", lyrics);
-    setPlayed({ ...played, track_id: { lyrics } });
+    const newPlayed = { ...played };
+    newPlayed[track_id] = lyrics;
+    setPlayed({ ...played, ...newPlayed });
   }, [lyrics]);
 
   return (
