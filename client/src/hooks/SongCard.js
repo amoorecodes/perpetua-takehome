@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import PlaylistContext from "../state/PlaylistContext";
+import PlayerContext from "../state/PlayerContext";
 
 function SongCard({ track_id, title, artist, index }) {
   const [lyrics, setLyrics] = useState("Lyrics loading...");
+  const [playlist, setPlaylist] = useContext(PlaylistContext);
+  const [played, setPlayed] = useContext(PlayerContext);
 
   // make a request to the API to get lyrics
   async function getLyrics() {
@@ -25,6 +29,11 @@ function SongCard({ track_id, title, artist, index }) {
       );
     // only run it once
   }, []);
+
+  useEffect(() => {
+    console.log("lyrics, ", lyrics);
+    setPlayed({ ...played, track_id: { lyrics } });
+  }, [lyrics]);
 
   return (
     <div className="song-card">
