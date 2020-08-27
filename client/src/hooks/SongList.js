@@ -6,12 +6,13 @@ function SongList(props) {
   const [playlist] = useContext(PlaylistContext);
   return (
     <div className="playlist">
-      {playlist.map((song, index) => (
+      {playlist.map(({ track }, index) => (
         <SongCard
-          index={index}
-          title={song.track_name}
-          trackId={song.track_id}
-          artist={song.artist_name}
+          index={index + 1}
+          title={track.track_name}
+          trackId={track.track_id}
+          artist={track.artist_name}
+          key={track.track_id}
         />
       ))}
     </div>

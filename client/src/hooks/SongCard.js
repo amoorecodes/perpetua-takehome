@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function SongCard({ index, title, artist, trackId }) {
+function SongCard(props) {
   const [lyrics, setLyrics] = useState("Lyrics loading...");
 
   // make a request to the API to get lyrics
@@ -18,12 +18,13 @@ function SongCard({ index, title, artist, trackId }) {
       );
     // only run it once
   }, []);
+  console.log("song in card", props);
 
   return (
     <div className="song-card">
-      <h2 className="index">Song {index}</h2>
-      <h3>Title: {title}</h3>
-      <h3>Artist: {artist}</h3>
+      <h2 className="index">Song {props.index}</h2>
+      <h3>Title: {props.title}</h3>
+      <h3>Artist: {props.artist}</h3>
       <p>{lyrics}</p>
     </div>
   );

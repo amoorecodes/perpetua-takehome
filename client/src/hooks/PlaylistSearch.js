@@ -13,7 +13,7 @@ function PlaylistSearch(props) {
         format: "json",
         q_lyrics: keywords,
         quorum_factor: "1",
-        apikey: "",
+        apikey: process.env.REACT_APP_API_KEY,
         page_size: "2",
       });
       // const response = await fetch("/api/generatePlaylist/" + query);
