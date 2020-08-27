@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import PlayerContext from "../state/PlayerContext";
+import "./SongCard.css";
 
 function SongCard({ track_id, title, artist, index }) {
   const [lyrics, setLyrics] = useState("Lyrics loading...");

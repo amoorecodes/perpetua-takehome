@@ -1,0 +1,15 @@
+.song-card {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  background-color: darkslategray;
+  color: lightgrey;
+  padding: 5px;
+  margin: 50px;
+  border-radius: 5px;
+}
+
+/* h2,
+h3 {
+  align-self: flex-start;
+} */

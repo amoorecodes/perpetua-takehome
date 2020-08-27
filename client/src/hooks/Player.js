@@ -6,7 +6,7 @@ import PlayerContext from "../state/PlayerContext";
 
 function Player() {
   const [playlist, setPlaylist] = useContext(PlaylistContext);
-  const [played, setPlayed] = useContext(PlayerContext);
+  const [played] = useContext(PlayerContext);
 
   async function getSong(lyrics) {
     try {
@@ -64,7 +64,8 @@ function Player() {
   useEffect(() => {
     // checking if we have songs in the played store
     if (Object.keys(played).length) {
-      const timer = setTimeout(getNewSong, 15000);
+      // change 5 seconds to the song's length
+      const timer = setTimeout(getNewSong, 5000);
       return () => {
         // remove set timeout
         // for some reason it is unstable with cleanup
@@ -73,7 +74,7 @@ function Player() {
         clearTimeout(timer);
       };
     }
-  }, [played, setPlayed]);
+  }, [played]);
   return (
     <div>
       <PlaylistSearch />
