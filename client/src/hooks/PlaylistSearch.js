@@ -6,7 +6,6 @@ function PlaylistSearch(props) {
   const [playlist, setPlaylist] = useContext(PlaylistContext);
 
   async function generatePlaylist(keywords) {
-    console.log("Generating playlist: ", keywords);
     try {
       // set new playlist on the context
       const query = new URLSearchParams({
@@ -31,7 +30,7 @@ function PlaylistSearch(props) {
           e.preventDefault();
           generatePlaylist(category)
             .then(({ message }) => {
-              setPlaylist([...playlist, ...message.body.track_list]);
+              setPlaylist([...message.body.track_list]);
             })
             .catch((err) =>
               console.error("ERROR: getting songs from API\n", err)

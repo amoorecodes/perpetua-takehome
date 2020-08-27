@@ -10,7 +10,7 @@ function SongList(props) {
         <SongCard
           index={index + 1}
           title={track.track_name}
-          trackId={track.track_id}
+          track_id={track.track_id}
           artist={track.artist_name}
           key={track.track_id}
         />
